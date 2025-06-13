@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Thêm văn bản vào GitHub</title>
+</head>
+<body>
+	<h2>📝 Nhập nội dung để thêm vào GitHub</h2>
+	<textarea id="text" rows="5" cols="40"></textarea><br>
+	<button onclick="send()">Gửi</button>
+	<p id="result"></p>
+	<script>
+		async function send() {
+			const text = document.getElementById("text").value;
+			const res = await fetch("/append", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ text })
+			});
+			document.getElementById("result").textContent =
+				res.ok ? "✅ Đã cập nhật thành công!" : "❌ Có lỗi xảy ra!";
+		}
+	</script>
+</body>
+</html>
